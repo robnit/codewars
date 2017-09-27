@@ -6,14 +6,15 @@ function interpreter(code, tape) {
     tapeIndex = 0;
     code = code.split('');
     codeIndex = 0;
-    jumpIndex = [];
 
     function flip (array,index){
       array[index] === '0' ? array[index] = '1' : array[index] = '0';
     }
 
+    //TODO: Refactor to work backwards
     function leftBracketCounter (currentIndex, rightBracketIndex){
-      code.splice(currentIndex + 1, rightBracketIndex).filter(a => { return a === '[' } ).length;
+      let codeClone = code.slice();
+      console.log ( codeClone.splice(currentIndex + 1, rightBracketIndex).filter(a => { return a === '[' } ).length );
     }
 
 debugger
@@ -23,13 +24,22 @@ debugger
         case '*': flip(tapeArray,tapeIndex);  break;
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
-        //TODO: fix
-        case '[': tapeArray[tapeIndex] === '0' ? codeIndex = code.indexOf(']', codeIndex) + 1 : jumpIndex.push(codeIndex); break;
-        case ']': if (tapeArray[tapeIndex] === '1') {
-          codeIndex = jumpIndex[jumpIndex.length - 1] - 1;
-          jumpIndex.pop();
-          break;
-         } 
+        //Move to matching ] if tapeArray[tapeIndex] is 0.
+        case '[': if ( tapeArray[tapeIndex] === '0' ){
+          //initialize '[' counter
+          let counter = 0;
+          //find index of first matching ']' from current code index
+          let newIndex = code.indexOf(']', codeIndex)
+          //get number of '['s between currentIndex and first matching ']'
+          leftBracketCounter(currentIndex, newIndex)
+          //find index of next matching ']' skipping num of '[' equal to counter value
+          //find number of '['s betwen currentIndex and new matching ']'
+              //if equal to value of '[' counter, move to index of matching ']'
+              //if greater than value of '[', 
+        }
+        break;
+        
+        case ']':  
       }//end of switch
       debugger
       codeIndex++;
@@ -42,7 +52,7 @@ debugger
 // [esfef [sdfsd [sdfsdfsd] sdfs] sdf]
 
 
-  interpreter("*[>[*]*>]>", "00000000000000000000000000000000000000");
+  interpreter("[[[[[[[]]]]]]]", "00000000000000000000000000000000000000");
 
 //   [ - Jump past matching ] if value at current cell is 0
 //   ] - Jump back to matching [ (if value at current cell is nonzero)
