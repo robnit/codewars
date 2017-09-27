@@ -1,5 +1,4 @@
 function interpreter(code, tape) {
-    // Implement your interpreter here
 
     console.log('code is',code);
     console.log('tape is',tape);
@@ -12,14 +11,19 @@ function interpreter(code, tape) {
     function flip (array,index){
       array[index] === '0' ? array[index] = '1' : array[index] = '0';
     }
+
+    function leftBracketCounter (currentIndex, rightBracketIndex){
+      code.splice(currentIndex + 1, rightBracketIndex).filter(a => { return a === '[' } ).length;
+    }
+
 debugger
-    while (tapeIndex !== tape.length){
+    while (tapeIndex !== tape.length && tapeIndex < tape.length && codeIndex > -1 && codeIndex < code.length){
 
       switch (code[codeIndex]){
         case '*': flip(tapeArray,tapeIndex);  break;
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
-        case '[': jumpIndex.push(codeIndex);  break;
+        case '[': tapeArray[tapeIndex] === '0' ? codeIndex = code.indexOf(']', codeIndex) + 1 : jumpIndex.push(codeIndex); break;
         case ']': if (tapeArray[tapeIndex] === '1') {
           codeIndex = jumpIndex[jumpIndex.length - 1] - 1;
           jumpIndex.pop();
@@ -29,15 +33,20 @@ debugger
       debugger
       codeIndex++;
     }
-    console.log(tapeArray.join(''));
+    console.log('answer is',tapeArray.join(''));
     return (tapeArray.join(''));
 
   }
+  // TODO: Make case ']' accept nested brackets
+// [esfef [sdfsd [sdfsdfsd] sdfs] sdf]
 
 
+  interpreter("*[>[*]*>]>", "00000000000000000000000000000000000000");
 
-  interpreter("*[>*]", "00000000000000000000000000000000000000");
-  "11111000000000000000000000000000000000"
+//   [ - Jump past matching ] if value at current cell is 0
+//   ] - Jump back to matching [ (if value at current cell is nonzero)
+
+
 //   Test.describe("Your Interpreter", function () {
 //     Test.it("should work for some example test cases", function () {
 //       // Flips the leftmost cell of the tape
