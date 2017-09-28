@@ -1,7 +1,4 @@
 function interpreter(code, tape) {
-
-    console.log('code is',code);
-    console.log('tape is',tape);
     let tapeArray = tape.split('');
     let tapeIndex = 0;
     let codeIndex = 0;
@@ -40,15 +37,14 @@ function interpreter(code, tape) {
       return currentIndex;
     }
 
-    while (tapeIndex < tape.length && tapeIndex < tape.length && codeIndex > -1 && codeIndex < code.length){
-
+    do {
       switch (code[codeIndex]){
         case '*': flip(tapeArray,tapeIndex);  break;
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
         case '[': 
         if ( tapeArray[tapeIndex] === '0' ){ 
-          codeIndex = findMatchingBracket(codeIndex, code) + 1;
+          codeIndex = findMatchingBracket(codeIndex, code);
           }
         break;
         case ']': 
@@ -61,12 +57,13 @@ function interpreter(code, tape) {
         
       }//end of switch
       codeIndex++;
-    }
+    } while (tapeIndex < tape.length && tapeIndex > -1 && codeIndex > -1 && codeIndex < code.length) //end of while
     console.log('answer is',tapeArray.join(''));
     return (tapeArray.join(''));
   }
-var tape = '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
-var code = '*>*>>>*>*>>>>>*[>*]'  
+var tape = '100';
+100
+var code = '*>[[]*>]<*'  
 // Test.assertEquals(interpreter("*>*[>*>*>*]>*>*>*", "00101100"), "11010011");
 
 
