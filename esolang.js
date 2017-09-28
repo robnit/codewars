@@ -1,7 +1,7 @@
 function interpreter(code, tape) {
-    let tapeArray = tape.split('');
     let tapeIndex = 0;
     let codeIndex = 0;
+    tape = tape.split('');
     code = code.split('');
 
     function flip ( array,index ){
@@ -39,23 +39,22 @@ function interpreter(code, tape) {
 
     do {
       switch ( code[codeIndex] ){
-        case '*': flip(tapeArray,tapeIndex);  break;
+        case '*': flip(tape,tapeIndex);  break;
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
         case '[': 
-        if ( tapeArray[tapeIndex] === '0' ){ 
+        if ( tape[tapeIndex] === '0' ){ 
           codeIndex = findMatchingBracket(codeIndex, code);
           }
         break;
         case ']': 
-        if ( tapeArray[tapeIndex] === '1' ){ 
+        if ( tape[tapeIndex] === '1' ){ 
           codeIndex = findMatchingBracket(codeIndex, code);
           }
         break;
-        
       }
       codeIndex++;
     } while (tapeIndex < tape.length && tapeIndex > -1 && codeIndex > -1 && codeIndex < code.length)
 
-    return (tapeArray.join(''));
+    return (tape.join(''));
   }
