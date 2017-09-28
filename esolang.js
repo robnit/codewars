@@ -47,10 +47,16 @@ function interpreter(code, tape) {
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
         case '[': 
-        case ']': if ( tapeArray[tapeIndex] === '0' ){ 
-          debugger
-          code[codeIndex] === '[' ? codeIndex = findMatchingBracket(codeIndex, code) + 1 : findMatchingBracket(codeIndex, code);
+        if ( tapeArray[tapeIndex] === '0' ){ 
+          codeIndex = findMatchingBracket(codeIndex, code) + 1;
           }
+        break;
+        case ']': 
+        if ( tapeArray[tapeIndex] === '1' ){ 
+          codeIndex = findMatchingBracket(codeIndex, code);
+          }
+        // debugger
+        
         break;
         
       }//end of switch
@@ -58,10 +64,10 @@ function interpreter(code, tape) {
     }
     console.log('answer is',tapeArray.join(''));
     return (tapeArray.join(''));
-
   }
-
-  // Test.assertEquals(interpreter("*>*[>*>*>*]>*>*>*", "00101100"), "11010011");
+var tape = '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
+var code = '*>*>>>*>*>>>>>*[>*]'  
+// Test.assertEquals(interpreter("*>*[>*>*>*]>*>*>*", "00101100"), "11010011");
 
 
 //   [ - Jump past matching ] if value at current cell is 0
