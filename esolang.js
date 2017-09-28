@@ -2,10 +2,10 @@ function interpreter(code, tape) {
 
     console.log('code is',code);
     console.log('tape is',tape);
-    tapeArray = tape.split('');
-    tapeIndex = 0;
+    let tapeArray = tape.split('');
+    let tapeIndex = 0;
+    let codeIndex = 0;
     code = code.split('');
-    codeIndex = 0;
 
     function flip (array,index){
       array[index] === '0' ? array[index] = '1' : array[index] = '0';
@@ -40,31 +40,20 @@ function interpreter(code, tape) {
       return currentIndex;
     }
 
-debugger
     while (tapeIndex < tape.length && tapeIndex < tape.length && codeIndex > -1 && codeIndex < code.length){
 
       switch (code[codeIndex]){
         case '*': flip(tapeArray,tapeIndex);  break;
         case '>': tapeIndex++;  break;
         case '<': tapeIndex--; break;
-        //Move to matching ] if tapeArray[tapeIndex] is 0.
         case '[': 
         case ']': if ( tapeArray[tapeIndex] === '0' ){ 
-          //initialize '[' counter
-          let counter = 0;
-          //find index of first matching ']' from current code index
-          let newIndex = code.indexOf(']', codeIndex)
-          //get number of '['s between currentIndex and first matching ']'
-
-          //find index of next matching ']' skipping num of '[' equal to counter value
-          //find number of '['s betwen currentIndex and new matching ']'
-              //if equal to value of '[' counter, move to index of matching ']'
-              //if greater than value of '[', 
-              break;
-        }
+          debugger
+          code[codeIndex] === '[' ? codeIndex = findMatchingBracket(codeIndex, code) + 1 : findMatchingBracket(codeIndex, code);
+          }
+        break;
         
       }//end of switch
-      debugger
       codeIndex++;
     }
     console.log('answer is',tapeArray.join(''));
@@ -72,6 +61,7 @@ debugger
 
   }
 
+  // Test.assertEquals(interpreter("*>*[>*>*>*]>*>*>*", "00101100"), "11010011");
 
 
 //   [ - Jump past matching ] if value at current cell is 0
