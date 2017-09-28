@@ -2,22 +2,32 @@ var x = ['[','[','[','[','[','[',']',']',']',']',']',']'];
 
 
 function findMatchingBracket(currentIndex, myArray) {
-let leftBrackets = 1;
-let rightBrackets = 0;
-do {
-  currentIndex++
+  let leftBrackets = 0;
+  let rightBrackets = 0;
+  let increment = 0;
   switch ( myArray[currentIndex] ){
-    case ']':
-      rightBrackets++;
-      break;
     case '[':
-      leftBrackets++;
+      leftBrackets = 1;
+      increment = 1;
       break;
-    default:
-      break;
+    case ']':
+      rightBrackets = 1;
+      increment = -1;
   }
-} while (leftBrackets !== rightBrackets)
-return currentIndex;
+  do {
+    currentIndex += increment;
+    switch ( myArray[currentIndex] ){
+      case ']':
+        rightBrackets++;
+        break;
+      case '[':
+        leftBrackets++;
+        break;
+      default:
+        break;
+    }
+  } while (leftBrackets !== rightBrackets)
+  return currentIndex;
 }
 
 
