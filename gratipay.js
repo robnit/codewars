@@ -1,12 +1,12 @@
 function getFeaturedProjects(allProjects) {
-  var featuredProjects = [];
-  const popular = allProjects.filter(a=> a.nReceiving_from > 5);
-  const unpopular = allProjects.filter(a=> !a.nReceiving_from > 5);
+  if (allProjects.length < 10) return allProjects;
+  let popular = allProjects.filter(a=> a.nreceiving_from > 5);
+  let unpopular = allProjects.filter(a=> a.nreceiving_from <= 5);
   
   function randomIndices(num){
     const indices = [];
     while (indices.length < num){
-      const myNumber = Math.floor(Math.random() * num);
+      let myNumber = Math.floor(Math.random() * num);
       if (!indices.includes(myNumber)) {
         indices.push(myNumber);
         }
@@ -19,6 +19,8 @@ function getFeaturedProjects(allProjects) {
     return newIndices.map(a=> array[a]);
   }
 
+  popular = shuffleArray(popular).slice(0,(unpopular.length<3) ? 10-unpopular.length : 7);
+  unpopular = shuffleArray(unpopular).slice(0,(10-popular.length));
 
-  return featuredProjects;
+  return shuffleArray(popular.concat(unpopular));
 }
