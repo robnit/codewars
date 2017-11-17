@@ -1,24 +1,20 @@
 function greedyThief(items, n){
-
-    items.map(a => {a.value = a.price / a.weight});
-        
-    items.sort(function (a,b) { 
-      if(a.value > b.value) {return -1}
-      if(a.value < b.value) {return 1}
-      if(a.value === b.value && a.price > b.price) {return -1}
-      if(a.value === b.value && a.price < b.price) {return 1}
+    const newItems = items.split(); 
+    newItems.sort(function (a,b) { 
+      if((a.price/a.weight) > (b.price/b.weight)) {return -1}
+      if((a.price/a.weight) < (b.price/b.weight)) {return 1}
+      if((a.price/a.weight) === (b.price/b.weight) && a.price > b.price) {return -1}
+      if((a.price/a.weight) === (b.price/b.weight) && a.price < b.price) {return 1}
       });
 
     const stolen = [];
 
-    for (let i = 0; i < items.length; i++){
-        if (n >= items[i].weight) {
-          stolen.push(items[i]);
-          n -= items[i].weight;
+    for (let i = 0; i < newItems.length; i++){
+        if (n >= newItems[i].weight) {
+          stolen.push(newItems[i]);
+          n -= newItems[i].weight;
           }
     }
-    
-    stolen.forEach(a => delete a.value);
 
     return stolen;
     
