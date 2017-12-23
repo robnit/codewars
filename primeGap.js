@@ -1,4 +1,6 @@
 function gap(g, m, n) {
+  let time = new Date();
+
   let prime = {
     gap: this.first - this.last,
     first: null,
@@ -7,6 +9,10 @@ function gap(g, m, n) {
   
   function isPrime(n) {
     //Math.ceil(n/2)?
+    if (n === 1) return false;
+    else if (n <= 3) return true;
+    else if (n%2 === 0 || n%3 === 0) return false;
+    
     let number = Math.ceil(n/2);
     while (number > 1) {
       if (n % number === 0) return false;
@@ -33,7 +39,11 @@ function gap(g, m, n) {
     }
     m++;
   }
-  
+  console.log('time is', time);
+
+  console.log('new Date is ', new Date());
+  console.log('yyy', time - new Date());
+
   return (prime.gap === g) ? [prime.first, prime.last] : null;
   
 }
