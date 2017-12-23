@@ -12,7 +12,7 @@ function gap(g, m, n) {
     if (n === 1) return false;
     else if (n <= 3) return true;
     else if (n%2 === 0 || n%3 === 0) return false;
-    
+
     let number = Math.ceil(n/2);
     while (number > 1) {
       if (n % number === 0) return false;
@@ -22,7 +22,7 @@ function gap(g, m, n) {
   }
   
   while(m < n) {
-
+    console.log('m is', m);
     if (isPrime(m) && !prime.first) {
       prime.first = m;
       prime.gap = 0;
@@ -39,11 +39,13 @@ function gap(g, m, n) {
     }
     m++;
   }
-  console.log('time is', time);
 
-  console.log('new Date is ', new Date());
-  console.log('yyy', time - new Date());
+  console.log('total time to complete', time - new Date());
 
   return (prime.gap === g) ? [prime.first, prime.last] : null;
   
 }
+
+
+//optimize for gap(2,10000000,11000000)
+//expected outcome [10000139, 10000141]
