@@ -8,12 +8,15 @@ function squareFreePart(n) {
       i--;
     }
   }
+
+  if (typeof n !== 'number' || Number.isNaN(n) || n < 1) return null;
   
   let divisor = (n < 3) ? n : Math.ceil(n/2);
   
   while (true) {
-    if (divisor === 0) return null;
+    if (divisor <= 0) return null;
     if ( !hasSquareFactors(divisor) && n%divisor === 0 ) return divisor;
     divisor--;
   }
+
 }
