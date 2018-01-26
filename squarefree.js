@@ -9,7 +9,7 @@ function squareFreePart(n) {
     }
   }
 
-  if (typeof n !== 'number' || Number.isNaN(n) || n < 1) return null;
+  if (typeof n !== 'number' || Number.isNaN(n) || n === Infinity || n < 1) return null;
   
   let divisor = (n < 3) ? n : Math.ceil(n/2);
   
