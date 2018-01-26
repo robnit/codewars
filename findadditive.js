@@ -3,11 +3,22 @@ function findAdditiveNumbers(num) {
   let index = 0;
   let interval = 1;
 
-  function getLength(number) {
-    return number.toString().length;
+  // function getLength(number) {
+  //   return number.toString().length;
+  // }
+
+  function sum(x, y) {
+    return (parseInt(x) + parseInt(y)).toString();
   }
 
-  
+  while (true) {
+    if (index === num.length) return sequence;
+    else if (sum(num[index], num[index + interval]) === num[index + 2*interval]) {
+      sequence.push(num[index], num[index + interval], num[index + 2*interval]);
+      index += 3*interval;
+    }
+    else return [];
+  }
 
 
 }
