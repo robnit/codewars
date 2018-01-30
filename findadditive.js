@@ -3,27 +3,36 @@ function findAdditiveNumbers(num) {
   let index = 0;
   let interval = 1;
 
-  // function getLength(number) {
-  //   return number.toString().length;
-  // }
-
   function sum(x, y) {
     return (parseInt(x) + parseInt(y)).toString();
   }
 
-  while (true) {
-    if (index === num.length) return sequence;
-    else if (sum(num[index], num[index + interval]) === num[index + 2*interval]) {
-      sequence.push(num[index], num[index + interval], num[index + 2*interval]);
-      index += 3*interval;
+
+  function findSum(index) {
+    let interval = 1;
+    
+    while (true) {
+      console.log('does', num.slice(index + interval + 1), 'start with', sum(num[index], num[index + interval]), '?');
+      if (num.length === index + interval + 1) return false;
+      else if ( num.slice(index + interval + 1).startsWith( sum(num[index], num[index + interval])) ) return true;
+      interval++;
     }
-    else return [];
   }
 
 
+
+
+  // while (true) {
+  //   if (index === num.length) return sequence;
+  //   else if (sum(num[index], num[index + interval]) === num[index + 2*interval]) {
+  //     sequence.push(num[index], num[index + interval], num[index + 2*interval]);
+  //     index += 3*interval;
+  //   }
+  //   else return [];
+  // }
+
+
 }
-
-
 
 
 // describe('Initial test',_ => {
