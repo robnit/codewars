@@ -8,17 +8,24 @@ function findAdditiveNumbers(num) {
   }
 
 
-  function findSum(index) {
-    let interval = 1;
+  // function findSum(index) {
+    // let interval = 1;
     
     while (true) {
       console.log('does', num.slice(index + interval + 1), 'start with', sum(num[index], num[index + interval]), '?');
-      if (num.length === index + interval + 1) return false;
-      else if ( num.slice(index + interval + 1).startsWith( sum(num[index], num[index + interval])) ) return true;
+      if (num.length === index + interval + 1) return 'no';
+      else if ( num.slice(index + interval + 1).startsWith( sum(num[index], num[index + interval])) ) return 'yes';
       interval++;
     }
-  }
+  // }
 
+/*
+check first digit in '12358'
+    does 1 plus 2 equal 3?
+yes
+move to 2
+    does 2 plus 3 equal 5?
+*/
 
 
 
