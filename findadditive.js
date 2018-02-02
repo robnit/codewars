@@ -1,32 +1,31 @@
 function findAdditiveNumbers(num) {
   const sequence = [];
   let index = 0;
-  let interval = 1;
+  let sum;
+  let number1 = 1;
+  let number2 = 1;
+  let newNumbers = [];
 
-  function sum(x, y) {
+  function add(x, y) {
     return (parseInt(x) + parseInt(y)).toString();
   }
 
+  // '199100199'
 
-  // function findSum(index) {
-    // let interval = 1;
-    
-    while (true) {
-      console.log('does', num.slice(index + interval + 1), 'start with', sum(num[index], num[index + interval]), '?');
-      if (num.length === index + interval + 1) return 'no';
-      else if ( num.slice(index + interval + 1).startsWith( sum(num[index], num[index + interval])) ) return 'yes';
-      interval++;
+  while (true) {
+    sum = add(num.slice(index, index+number1), num.slice(index + number1, index+(number1 + number2)));
+    if (num.slice(index + number1 + number2).startsWith(sum)) {
+      newNumbers = [
+        num.slice(index, number1),
+        num.slice(index + number1, index + number1 + number2),
+        sum
+      ];
+      newNumbers.forEach(number => sequence.push(number));
+      index += number1 + number2 + sum.length;
+      number1, number2 = 1;
     }
-  // }
-
-/*
-check first digit in '12358'
-    does 1 plus 2 equal 3?
-yes
-move to 2
-    does 2 plus 3 equal 5?
-*/
-
+    else number2++;
+  }
 
 
   // while (true) {
