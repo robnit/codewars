@@ -17,7 +17,7 @@ function findAdditiveNumbers(num) {
       add(num.slice(index, index+number1), num.slice(index + number1, index+(number1 + number2)))
     ];
   }
-  
+
   // findAdditiveNumbers('7916972717643273704501372383')
 
   while (true) {
@@ -31,9 +31,13 @@ function findAdditiveNumbers(num) {
       number2++;
     }
 
-    if (number1 === num.length || sequence.some( e => e.length > 1 && e.startsWith('0'))) return [];
+    if (number1 === num.length || sequence.some( e => e.length > 1 && e.startsWith('0'))) {
+      return [];
+    }
     if (sequence.reduce((acc, e) => acc += e.length,0) === num.length) return sequence;
     if (number2 === num.length) {
+      index = 0;
+      sequence.length = 0;
       number1++;
       number2 = 1;
     }
