@@ -6,7 +6,6 @@ function findAdditiveNumbers(num) {
   let newNumbers = [];
   populateNewNumbers();
 
-
   function add(x, y) {
     return (parseInt(x) + parseInt(y)).toString();
   }
@@ -18,12 +17,7 @@ function findAdditiveNumbers(num) {
       add(num.slice(index, index+number1), num.slice(index + number1, index+(number1 + number2)))
     ];
   }
-  // '199100199'
-  /*
-      1, 99, 100
-      99, 100, 199
 
-  */
 
   while (true) {
     if (num.slice(index + number1 + number2).startsWith(newNumbers[2])) {
@@ -36,6 +30,9 @@ function findAdditiveNumbers(num) {
       number2++;
     }
 
+    // 1023
+
+    if (number1 === num.length || sequence.some( e => e.startsWith('0'))) return [];
     if (sequence.reduce((acc, e) => acc += e.length,0) === num.length) return sequence;
     if (number2 === num.length) {
       number1++;
