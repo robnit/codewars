@@ -21,6 +21,14 @@ function findAdditiveNumbers(num) {
 
   // 60647653137172137035087564579154414800123954538754662709110146371641728 breaks the code somehow
 
+  /* findAdditiveNumber('252645267041315619860330165287685892138768224660363428588088951516')
+Expected: '[\'252\', \'6452\', \'6704\', \'13156\', \'19860\', \'33016\', \'52876\', \'85892\', \'138768\', \'224660\', \'363428\', \'588088\', \'951516\']', instead got: '[]'
+
+
+WHY DOES THIS NOT WORK : findAdditiveNumbers('25264526704')
+  should return 252, 6452, 6704
+*/
+
   while (true) {
     if (num.slice(index + number1 + number2).startsWith(newNumbers[2])) {
       (sequence.length < 3) ? newNumbers.forEach(number => sequence.push(number)) : sequence.push(newNumbers[2]);
